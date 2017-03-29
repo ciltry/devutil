@@ -464,7 +464,7 @@ public abstract class CommonDAOImpl extends JdbcDaoSupport implements CommonDAO 
 	public <T extends BaseModel> T peekObject(T model) {
 		String whereClause = this.getWhereClause(model, null);
 		List<Object> args = getArgsFromModel(model);
-		StringBuilder sql = new StringBuilder(String.format("SELECT * FROM (select ROW_NUMBER() OVER() AS R, t.* from %s.%s t %s order by t.gmtcreate) T WHERE T.R=1", this.getDefaultSchema(), this.getTableName(model), whereClause));
+		StringBuilder sql = new StringBuilder(String.format("SELECT * FROM (select ROW_NUMBER() OVER() AS R, t.* from %s.%s t %s order by t.gmt_create) T WHERE T.R=1", this.getDefaultSchema(), this.getTableName(model), whereClause));
 		List<T> list = this.queryForList(sql.toString(), model);
 		T res = null;
 		if (list.size() > 0) {
@@ -728,7 +728,7 @@ public abstract class CommonDAOImpl extends JdbcDaoSupport implements CommonDAO 
 				if (counter > 0) {
 					where.append(" AND ");
 				}
-				where.append(field.getName() + "=?");
+				where.append(this.getColumnName(field) + "=?");
 				counter++;
 			}
 		}

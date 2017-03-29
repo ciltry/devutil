@@ -136,7 +136,7 @@ public class CommonDAODerbyImpl extends CommonDAOImpl {
 			if (i > 0) {
 				sql.append(", ");
 			}
-			sql.append(field.getName().toLowerCase());
+			sql.append(this.getColumnName(field));
 		}
 		sql.append(") VALUES (");
 		
