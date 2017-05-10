@@ -117,7 +117,6 @@ public abstract class CommonDAOImpl extends JdbcDaoSupport implements CommonDAO 
 		for (Class<? extends BaseModel> modelClass: modelClassList) {
 			try {
 				String sql = getTableStructureSQL(modelClass);
-				System.out.println(sql);
 				logger.debug(modelClass.getName() + "\n" + sql);
 				this.getJdbcTemplate().execute(sql);
 				logger.info(String.format("%s 表创建成功", modelClass.getName()));

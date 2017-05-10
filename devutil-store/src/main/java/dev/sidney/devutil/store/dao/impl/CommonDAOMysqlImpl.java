@@ -35,7 +35,7 @@ public class CommonDAOMysqlImpl extends CommonDAOImpl {
 		
 		StringBuilder sql = new StringBuilder();
 		
-		String schema = "javaidc_ciltry";
+		String schema = this.getDefaultSchema();
 		sql.append(String.format("CREATE TABLE %s.`%s` (", schema, tableName));
 		
 		for (int i = 0; i < fieldList.size(); i++) {
@@ -108,7 +108,7 @@ public class CommonDAOMysqlImpl extends CommonDAOImpl {
 		} else if (type == FieldType.TIMESTAMP) {
 			res = "DATETIME";
 		} else if (type == FieldType.DOUBLE) {
-			res = String.format("NUMBER(%d,%d)", p, s);
+			res = String.format("DECIMAL(%d,%d)", p, s);
 		} else if (type == FieldType.INTEGER) {
 			res = "INT";
 		} else if (type == FieldType.LONG) {
